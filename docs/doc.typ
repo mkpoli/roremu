@@ -19,7 +19,7 @@
   align(center, body)
 }
 
-#let package_info = toml("typst.toml")
+#let package_info = toml("../typst.toml")
 #let name = package_info.package.name
 #let version = package_info.package.version
 
@@ -39,9 +39,9 @@ import "@preview/lorem-ja:0.1.0": lorem-ja
 ```
 
 == 例
-#include("test/test.typ")
+#include("../test/test.typ")
 
 = API Reference
 == 関数
-#let docs = tidy.parse-module(read("src/lib.typ"))
+#let docs = tidy.parse-module(read("../src/lib.typ"))
 #show-module(docs)
