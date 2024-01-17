@@ -1,0 +1,7 @@
+[package]
+name = "lorem-ja"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["mkpoli"]
+license = "Unlicense"
+description = "日本語のダミーテキスト生成（Lorem Ipsum）"
