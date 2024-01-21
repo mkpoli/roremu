@@ -31,7 +31,7 @@ jobs:
         with:
           source_paths: 'docs/doc.typ'
           output_paths: 'docs/doc.pdf'
-          fonts_path: $GITHUB_WORKSPACE/fonts
+          fonts_path: 'fonts'
 
       - name: Remove Fonts from Repository
         run: rm -rf $GITHUB_WORKSPACE/fonts
