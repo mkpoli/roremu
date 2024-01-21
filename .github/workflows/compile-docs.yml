@@ -27,11 +27,12 @@ jobs:
           unzip $GITHUB_WORKSPACE/fonts/11_NotoSansMonoCJKjp.zip -d $GITHUB_WORKSPACE/fonts/notosansmonocjkjp
 
       - name: Compile Typst to PDF
-        uses: ammar-ahmed22/compile-typst-action@v1
+        uses: mkpoli/compile-typst-action@main
         with:
           source_paths: 'docs/doc.typ'
           output_paths: 'docs/doc.pdf'
           fonts_path: 'fonts'
+          root_path: '.'
 
       - name: Remove Fonts from Repository
         run: rm -rf $GITHUB_WORKSPACE/fonts
