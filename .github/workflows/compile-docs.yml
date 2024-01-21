@@ -14,31 +14,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set Fonts Directory
-        run: |
-          echo "FONTS_DIR=$RUNNER_TEMP/fonts" >> $GITHUB_ENV
+      - name: Create fonts directory in the repository
+        run: mkdir -p $GITHUB_WORKSPACE/fonts
 
-      - name: Download Fira Code Font
+      - name: Download and Extract Fonts
         run: |
-          mkdir -p ${{ env.FONTS_DIR }}/firacode
-          wget -P ${{ env.FONTS_DIR }}/firacode https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
-          unzip ${{ env.FONTS_DIR }}/firacode/Fira_Code_v5.2.zip -d ${{ env.FONTS_DIR }}/firacode
-
-      - name: Download Noto Serif CJK JP
-        run: |
-          mkdir -p ${{ env.FONTS_DIR }}/notoserifcjkjp
-          wget -P ${{ env.FONTS_DIR }}/notoserifcjkjp https://noto-website-2.storage.googleapis.com/pkgs/NotoSerifCJKjp-hinted.zip
-          unzip ${{ env.FONTS_DIR }}/notoserifcjkjp/NotoSerifCJKjp-hinted.zip -d ${{ env.FONTS_DIR }}/notoserifcjkjp
-
-      - name: Download Noto Sans Mono CJK JP
-        run: |
-          mkdir -p ${{ env.FONTS_DIR }}/notosansmonocjkjp
-          wget -P ${{ env.FONTS_DIR }}/notosansmonocjkjp https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/11_NotoSansMonoCJKjp.zip
-          unzip ${{ env.FONTS_DIR }}/notosansmonocjkjp/11_NotoSansMonoCJKjp.zip -d ${{ env.FONTS_DIR }}/notosansmonocjkjp
-
-      - name: Create symbolic link to fonts directory
-        run: |
-          ln -s ${{ env.FONTS_DIR }} $GITHUB_WORKSPACE/fonts
+          wget -P $GITHUB_WORKSPACE/fonts https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
+          unzip $GITHUB_WORKSPACE/fonts/Fira_Code_v5.2.zip -d $GITHUB_WORKSPACE/fonts/firacode
+          wget -P $GITHUB_WORKSPACE/fonts https://noto-website-2.storage.googleapis.com/pkgs/NotoSerifCJKjp-hinted.zip
+          unzip $GITHUB_WORKSPACE/fonts/NotoSerifCJKjp-hinted.zip -d $GITHUB_WORKSPACE/fonts/notoserifcjkjp
+          wget -P $GITHUB_WORKSPACE/fonts https://noto-website-2.storage.googleapis.com/pkgs/NotoSansMonoCJKjp-hinted.zip
+          unzip $GITHUB_WORKSPACE/fonts/NotoSansMonoCJKjp-hinted.zip -d $GITHUB_WORKSPACE/fonts/notosansmono
 
       - name: Compile Typst to PDF
         uses: ammar-ahmed22/compile-typst-action@v1
@@ -47,7 +33,11 @@ jobs:
           output_paths: 'docs/doc.pdf'
           fonts_path: $GITHUB_WORKSPACE/fonts
 
+      - name: Remove Fonts from Repository
+        run: rm -rf $GITHUB_WORKSPACE/fonts
+
       - name: Commit compiled PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: '[continuous deployment]: Compiled docs to PDF'
+          file_pattern: 'docs/doc.pdf'
