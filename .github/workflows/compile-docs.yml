@@ -23,8 +23,8 @@ jobs:
           unzip $GITHUB_WORKSPACE/fonts/Fira_Code_v5.2.zip -d $GITHUB_WORKSPACE/fonts/firacode
           wget -P $GITHUB_WORKSPACE/fonts https://noto-website-2.storage.googleapis.com/pkgs/NotoSerifCJKjp-hinted.zip
           unzip $GITHUB_WORKSPACE/fonts/NotoSerifCJKjp-hinted.zip -d $GITHUB_WORKSPACE/fonts/notoserifcjkjp
-          wget -P $GITHUB_WORKSPACE/fonts https://noto-website-2.storage.googleapis.com/pkgs/NotoSansMonoCJKjp-hinted.zip
-          unzip $GITHUB_WORKSPACE/fonts/NotoSansMonoCJKjp-hinted.zip -d $GITHUB_WORKSPACE/fonts/notosansmono
+          wget -P $GITHUB_WORKSPACE/fonts https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/11_NotoSansMonoCJKjp.zip
+          unzip $GITHUB_WORKSPACE/fonts/11_NotoSansMonoCJKjp.zip -d $GITHUB_WORKSPACE/fonts/notosansmonocjkjp
 
       - name: Compile Typst to PDF
         uses: ammar-ahmed22/compile-typst-action@v1
