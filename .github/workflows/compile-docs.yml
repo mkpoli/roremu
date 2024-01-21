@@ -36,12 +36,16 @@ jobs:
           wget -P ${{ env.FONTS_DIR }}/notosansmonocjkjp https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/11_NotoSansMonoCJKjp.zip
           unzip ${{ env.FONTS_DIR }}/notosansmonocjkjp/11_NotoSansMonoCJKjp.zip -d ${{ env.FONTS_DIR }}/notosansmonocjkjp
 
+      - name: Create symbolic link to fonts directory
+        run: |
+          ln -s ${{ env.FONTS_DIR }} $GITHUB_WORKSPACE/fonts
+
       - name: Compile Typst to PDF
         uses: ammar-ahmed22/compile-typst-action@v1
         with:
           source_paths: 'docs/doc.typ'
           output_paths: 'docs/doc.pdf'
-          fonts_path: ${{ env.FONTS_DIR }}
+          fonts_path: $GITHUB_WORKSPACE/fonts
 
       - name: Commit compiled PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
