@@ -2,7 +2,7 @@ name: Compile and Commit documentation file.
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 permissions:
