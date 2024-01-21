@@ -32,9 +32,9 @@ jobs:
 
       - name: Download Noto Sans Mono CJK JP
         run: |
-          mkdir -p ${{ env.FONTS_DIR }}/notosansmono
-          wget -P ${{ env.FONTS_DIR }}/notosansmono https://noto-website-2.storage.googleapis.com/pkgs/NotoSansMonoCJKjp-hinted.zip
-          unzip ${{ env.FONTS_DIR }}/notosansmono/NotoSansMonoCJKjp-hinted.zip -d ${{ env.FONTS_DIR }}/notosansmono
+          mkdir -p ${{ env.FONTS_DIR }}/notosansmonocjkjp
+          wget -P ${{ env.FONTS_DIR }}/notosansmonocjkjp https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/11_NotoSansMonoCJKjp.zip
+          unzip ${{ env.FONTS_DIR }}/notosansmonocjkjp/11_NotoSansMonoCJKjp.zip -d ${{ env.FONTS_DIR }}/notosansmonocjkjp
 
       - name: Compile Typst to PDF
         uses: ammar-ahmed22/compile-typst-action@v1
